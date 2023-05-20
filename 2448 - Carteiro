@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int BuscaBinaria(int arr[], int tamanho, int valor);
+
+int main(void) {
+  int i,N, M, tempo = 0, inicio = 0;
+  scanf("%d %d",&N,&M);
+  int casas[N],encomendas[M];
+
+  for(i=0;i<N;i++){
+    scanf("%d",&casas[i]);
+  }
+
+  for(i=0;i<M;i++){
+      scanf("%d",&encomendas[i]);
+  }
+  
+  for(i=0;i<M;i++){
+      int final = BuscaBinaria(casas, N, encomendas[i]);
+      tempo += abs(final - inicio);
+      inicio = final;
+  }
+  printf("%d\n",tempo);
+}
+
+int BuscaBinaria(int arr[], int tamanho, int valor){
+  int inicio = 0;
+  int final = tamanho-1;
+  int meio;
+
+  while(inicio <= final){
+
+    meio = (inicio + final) / 2;
+    
+    if(valor > arr[meio]){
+      inicio = meio + 1;
+    }
+      else if (valor < arr[meio]) {
+        final = meio - 1;
+      }
+    else{
+      return meio;
+    }
+    
+  }
+  return -1;
+}
